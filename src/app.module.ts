@@ -9,6 +9,7 @@ import { HttpCacheInterceptor } from './common/interceptors/cache.interceptor'
 import { JSONTransformerInterceptor } from './common/interceptors/json-transformer.interceptor'
 import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { ConfigsModule } from './modules/configs/configs.module'
+import { GoodsModule } from './modules/goods/goods.module'
 import { PostModule } from './modules/post/post.module'
 import { UserModule } from './modules/user/user.module'
 import { CacheModule } from './processors/cache/cache.module'
@@ -21,10 +22,10 @@ import { HelperModule } from './processors/helper/helper.module'
     DatabaseModule,
     HelperModule,
     ConfigsModule,
-
     LoggerModule,
     PostModule,
     UserModule,
+    GoodsModule,
   ],
   controllers: [AppController],
   providers: [

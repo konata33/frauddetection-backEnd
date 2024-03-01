@@ -1,6 +1,6 @@
 import { compareSync } from 'bcryptjs'
 
-import { nanoid, sleep } from '@nest-http/external'
+import { nanoid } from '@nest-http/external'
 import {
   BadRequestException,
   ForbiddenException,
@@ -33,11 +33,9 @@ export class UserService {
   async login(username: string, password: string) {
     const user = await this.userModel.findOne({ username }).select('+password')
     if (!user) {
-      await sleep(3000)
       throw new ForbiddenException('用户名不正确')
     }
     if (!compareSync(password, user.password)) {
-      await sleep(3000)
       throw new ForbiddenException('密码不正确')
     }
 

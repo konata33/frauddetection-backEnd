@@ -47,7 +47,7 @@ export async function bootstrap() {
     }),
   )
 
-  await app.listen(+PORT, '0.0.0.0', async (err, address) => {
+  await app.listen(+PORT, '0.0.0.0', async () => {
     app.useLogger(app.get(Logger))
     consola.info('ENV:', process.env.NODE_ENV)
     const url = await app.getUrl()
