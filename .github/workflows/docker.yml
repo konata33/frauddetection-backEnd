@@ -53,6 +53,6 @@ jobs:
         with:
           context: .
           # push: ${{ startsWith(github.ref, 'refs/tags/v') }}
-          push: true
+          push: false
           tags: ${{ steps.meta.outputs.tags }},nest/nest-http:latest
           labels: ${{ steps.meta.outputs.labels }}
