@@ -17,7 +17,7 @@ export const databaseProvider = {
     }
     const Badge = `[${chalk.yellow('MongoDB')}]`
 
-    const color = (str: TemplateStringsArray) => {
+    const color = (str: TemplateStringsArray, ...args: any[]) => {
       return str.map((s) => chalk.green(s)).join('')
     }
     mongoose.connection.on('connecting', () => {
