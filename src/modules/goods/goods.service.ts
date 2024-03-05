@@ -28,14 +28,11 @@ export class GoodsService {
   async getGoodsList(queryGoodsDto: QueryGoodsDto) {
     const { page = 1, limit = 10 } = queryGoodsDto
     const skip = (page - 1) * limit
-    const goods = await this.goodsModel.find().skip(skip).limit(limit)
+    const list = await this.goodsModel.find().skip(skip).limit(limit)
 
     const total = await this.goodsModel.countDocuments()
-    const totalPages = Math.ceil(total / limit)
-
-    return { goods, total, totalPages }
+    return { data: list, code: 200, total }
   }
-  s
 
   async updateGoods(id: string, updateGoodsDto: UpdateGoodsDto) {
     return await this.goodsModel.findByIdAndUpdate(id, updateGoodsDto)

@@ -9,6 +9,8 @@ import {
   Query,
 } from '@nestjs/common'
 
+import { HTTPDecorators } from '~/common/decorators/http.decorator'
+
 import { CreateGoodsDto, QueryGoodsDto, UpdateGoodsDto } from './goods.dto'
 import { GoodsService } from './goods.service'
 
@@ -17,6 +19,7 @@ export class GoodsController {
   constructor(private readonly goodsService: GoodsService) {}
 
   @Get('')
+  @HTTPDecorators.Bypass
   async getList(@Query() paginationDto: QueryGoodsDto) {
     return await this.goodsService.getGoodsList(paginationDto)
   }

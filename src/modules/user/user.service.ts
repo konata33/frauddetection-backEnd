@@ -39,7 +39,9 @@ export class UserService {
       throw new ForbiddenException('密码不正确')
     }
 
-    return user
+    const token = await this.authService.signToken(user.id)
+
+    return { token }
   }
 
   async getMasterInfo(getLoginIp = false) {
@@ -51,7 +53,7 @@ export class UserService {
       throw new BadRequestException('没有完成初始化！')
     }
 
-    return { ...user }
+    return { data: user }
   }
   async hasMaster() {
     return !!(await this.userModel.countDocuments())

@@ -26,4 +26,9 @@ export class UserController {
     const { username, password } = loginDto
     return await this.userService.login(username, password)
   }
+
+  @Get('/userInfo')
+  async userInfo() {
+    return await this.userService.getMasterInfo()
+  }
 }
