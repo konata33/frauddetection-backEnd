@@ -28,7 +28,11 @@ services:
     image: lingfengi/frauddetection:latest
     ports:
       - '5173:80'
-    restart: always
+    links:
+      - mongo
+      - redis
+    networks:
+      - app-network
 
   mongo:
     container_name: mongo
