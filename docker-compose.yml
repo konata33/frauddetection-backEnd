@@ -25,7 +25,7 @@ services:
 
   console:
     container_name: front-http
-    image: lingfengi/frauddetection
+    image: lingfengi/frauddetection:latest
     ports:
       - '5173:80'
     restart: always
