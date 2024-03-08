@@ -23,6 +23,13 @@ services:
     networks:
       - app-network
 
+  console:
+    container_name: front-http
+    image: lingfengi/frauddetection
+    ports:
+      - '5173:80'
+    restart: always
+
   mongo:
     container_name: mongo
     image: mongo
