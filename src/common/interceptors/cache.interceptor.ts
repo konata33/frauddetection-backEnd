@@ -5,8 +5,7 @@
  * @author Surmon <https://github.com/surmon-china>
  * @author Innei <https://innei.ren>
  */
-import { Observable, of } from 'rxjs'
-import { tap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 import {
   CallHandler,
@@ -18,7 +17,6 @@ import {
 } from '@nestjs/common'
 import { HttpAdapterHost, Reflector } from '@nestjs/core'
 
-import { REDIS } from '~/app.config'
 import * as META from '~/constants/meta.constant'
 import * as SYSTEM from '~/constants/system.constant'
 import { CacheService } from '~/processors/cache/cache.service'
@@ -45,44 +43,46 @@ export class HttpCacheInterceptor implements NestInterceptor {
     // 如果想彻底禁用缓存服务，则直接返回 -> return call$;
     const call$ = next.handle()
 
-    if (REDIS.disableApiCache) {
-      return call$
-    }
+    return call$
 
-    const request = this.getRequest(context)
+    // if (REDIS.disableApiCache) {
+    //   return call$
+    // }
 
-    // 只有 GET 请求才会缓存
-    if (request.method.toLowerCase() !== 'get') {
-      return call$
-    }
+    // const request = this.getRequest(context)
 
-    const handler = context.getHandler()
-    const isDisableCache = this.reflector.get(META.HTTP_CACHE_DISABLE, handler)
-    const key = this.trackBy(context) || `mx-api-cache:${request.url}`
+    // // 只有 GET 请求才会缓存
+    // if (request.method.toLowerCase() !== 'get') {
+    //   return call$
+    // }
 
-    if (isDisableCache) {
-      return call$
-    }
+    // const handler = context.getHandler()
+    // const isDisableCache = this.reflector.get(META.HTTP_CACHE_DISABLE, handler)
+    // const key = this.trackBy(context) || `mx-api-cache:${request.url}`
 
-    const metaTTL = this.reflector.get(META.HTTP_CACHE_TTL_METADATA, handler)
-    const ttl = metaTTL || REDIS.httpCacheTTL
+    // if (isDisableCache) {
+    //   return call$
+    // }
 
-    try {
-      const value = await this.cacheManager.get(key)
+    // const metaTTL = this.reflector.get(META.HTTP_CACHE_TTL_METADATA, handler)
+    // const ttl = metaTTL || REDIS.httpCacheTTL
 
-      return value
-        ? of(value)
-        : call$.pipe(
-            tap(
-              (response) =>
-                response && this.cacheManager.set(key, response, ttl),
-            ),
-          )
-    } catch (error) {
-      console.error(error)
+    // try {
+    //   const value = await this.cacheManager.get(key)
 
-      return call$
-    }
+    //   return value
+    //     ? of(value)
+    //     : call$.pipe(
+    //         tap(
+    //           (response) =>
+    //             response && this.cacheManager.set(key, response, ttl),
+    //         ),
+    //       )
+    // } catch (error) {
+    //   console.error(error)
+
+    //   return call$
+    // }
   }
 
   /**
