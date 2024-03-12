@@ -3,7 +3,7 @@ import { ReturnModelType } from '@typegoose/typegoose'
 
 import { InjectModel } from '~/transformers/model.transformer'
 
-import { CreateGoodsDto, QueryGoodsDto, UpdateGoodsDto } from './goods.dto'
+import { CreateGoodsDto, UpdateGoodsDto } from './goods.dto'
 import { GoodsModel } from './goods.model'
 
 @Injectable()
@@ -25,11 +25,8 @@ export class GoodsService {
     return await this.goodsModel.findById(id)
   }
 
-  async getGoodsList(queryGoodsDto: QueryGoodsDto) {
-    const { page = 1, limit = 10 } = queryGoodsDto
-    const skip = (page - 1) * limit
-    const list = await this.goodsModel.find().skip(skip).limit(limit)
-
+  async getGoodsList() {
+    const list = await this.goodsModel.find()
     const total = await this.goodsModel.countDocuments()
     return { data: list, code: 200, total }
   }

@@ -21,7 +21,7 @@ export class GoodsController {
   @Get('')
   @HTTPDecorators.Bypass
   async getList(@Query() paginationDto: QueryGoodsDto) {
-    return await this.goodsService.getGoodsList(paginationDto)
+    return await this.goodsService.getGoodsList()
   }
 
   @Post()
