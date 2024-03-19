@@ -35,7 +35,7 @@ services:
       - app-network
 
   mongo:
-    container_name: nest-mongo
+    container_name: mongo
     image: mongo
     volumes:
       - ./data/db:/data/db
@@ -45,7 +45,7 @@ services:
       - app-network
 
   redis:
-    image: nest-redis
+    image: redis
     container_name: redis
 
     ports:
