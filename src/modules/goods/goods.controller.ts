@@ -29,9 +29,9 @@ export class GoodsController {
     return await this.goodsService.createGoods(createGoodsDto)
   }
 
-  @Get('/:id')
-  async getOne(@Param('id') id: string) {
-    return await this.goodsService.getOneGoods(id)
+  @Get('/:securityCode')
+  async getOne(@Param('securityCode') securityCode: string) {
+    return await this.goodsService.getOneGoodsBySecurityCode(securityCode)
   }
 
   @Put('/:id')

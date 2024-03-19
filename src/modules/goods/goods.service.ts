@@ -21,8 +21,8 @@ export class GoodsService {
     return await newGoods.save()
   }
 
-  async getOneGoods(id: string) {
-    return await this.goodsModel.findById(id)
+  async getOneGoodsBySecurityCode(securityCode: string) {
+    return await this.goodsModel.findOne({ securityCode })
   }
 
   async getGoodsList() {

@@ -34,9 +34,6 @@ export async function bootstrap() {
     credentials: true,
   })
 
-  console.log('这个是多少？')
-  console.log(isDev)
-
   !isDev && app.setGlobalPrefix(`api`)
   isDev && app.useGlobalInterceptors(new LoggingInterceptor())
   app.useGlobalPipes(
